@@ -28,7 +28,7 @@ To use the script, follow the steps below:
 2. **Run the Script**: Execute the script using the following command:
 
     ```bash
-    python visualization.py
+    python3 visualization.py
     ```
 
     The script assumes a default dataset path (`fruitData/Training` for training and `fruitData/Test` for testing). Modify the `dataset_path` variable in the script if your dataset is located elsewhere.
@@ -72,7 +72,7 @@ if not os.path.exists('your_plots_folder'):
 This script (`train.py`) is designed for training and evaluating deep learning models on a given dataset. The script supports various models and training configurations. Below is an example command to run the script:
 
 ```
-python train.py --dataset_path cat_dog_dataset --mode train --model_name custom_mobilenet --epochs 20 --batch_size 64 --split_ratio 0.2 --lr 0.01 --patience 10 --evaluate True
+python3 train.py --dataset_path cat_dog_dataset --mode train --model_name custom_mobilenet --epochs 20 --batch_size 64 --split_ratio 0.2 --lr 0.01 --patience 10 --evaluate True
 ```
 
 ## Usage
@@ -116,7 +116,7 @@ Choose the appropriate model based on your specific requirements. For MobileNetV
 
 - `--epochs`: The number of epochs to train the model for. An epoch is one complete pass through the entire dataset. The default value is 10.
 
-- `--batch_size`: The batch size to use for training and testing. A batch is a subset of the dataset that is fed to the model at once. The default value is 32.
+- `--batch_size`: The batch size to use for training and testing. A batch is a subset of the dataset that is fed to the model at once. The default value is 64.
 
 - `--split_ratio`: The ratio of the dataset to use for training and validation. The validation set is used to monitor the performance of the model during training and avoid overfitting. The default value is 0.2, which means 80% of the dataset will be used for training and 20% for validation.
 
@@ -126,9 +126,9 @@ Choose the appropriate model based on your specific requirements. For MobileNetV
 
 - `--patience`: The patience to use for early stopping. Early stopping is a technique that stops the training process when the validation loss stops improving for a certain number of epochs. This helps to prevent overfitting and save computational resources. The patience is the number of epochs to wait before stopping the training if the validation loss does not improve. The default value is 5.
 
-- `--evaluate`: A boolean flag that indicates whether to evaluate the model on the test set after training. The test set is a separate set of images that is not used for training or validation, and is used to measure the final performance of the model. The default value is False.
+- `--evaluate`: A boolean flag that indicates whether to evaluate the model on the test set after training. The test set is a separate set of images that is not used for training or validation, and is used to measure the final performance of the model. The default value is True.
 
-- `--show_plots`: A boolean flag that indicates whether to show the plots of the losses and accuracies after training. The plots are also saved as PNG files in the same folder as the script. The default value is False.
+- `--show_plots`: A boolean flag that indicates whether to show the plots of the losses and accuracies after training. The plots are also saved as PNG files in the same folder as the script. The default value is True.
 
 ## Example
 

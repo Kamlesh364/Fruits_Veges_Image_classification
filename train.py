@@ -252,7 +252,7 @@ if __name__ == "__main__":
     parser.add_argument('--split_ratio', type=float, default=0.2, help='Ratio for train-validation split')
     parser.add_argument('--shuffle', type=bool, default=True, help='Shuffle the dataset before splitting')
     parser.add_argument('--lr', type=float, default=0.001, help='Learning rate for training')
-    parser.add_argument('--patience', type=int, default=50, help='Patience for early stopping')
+    parser.add_argument('--patience', type=int, default=5, help='Patience for early stopping')
     parser.add_argument('--evaluate', type=bool, default=True, help='Evaluate the model on test set')
     parser.add_argument('--show_plots', type=bool, default=True, help='Show plots')
 
