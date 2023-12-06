@@ -11,6 +11,60 @@ In this project, the aim is to automate the packaging process of fruits and vege
 7. Performance analysis
 ```
 
+# Visualization.py - Dataset Exploration and Visualization
+
+The `visualization.py` script is designed to explore and visualize image datasets. It loads images and labels, provides basic information about the dataset, visualizes the class distribution, displays sample images for each class, and checks for outliers based on the number of images per class.
+
+### Usage
+
+To use the script, follow the steps below:
+
+1. **Import Dependencies**: Ensure that you have the necessary dependencies installed. You can install them using the following:
+
+    ```bash
+    pip install pandas matplotlib seaborn Pillow
+    ```
+
+2. **Run the Script**: Execute the script using the following command:
+
+    ```bash
+    python visualization.py
+    ```
+
+    The script assumes a default dataset path (`fruitData/Training` for training and `fruitData/Test` for testing). Modify the `dataset_path` variable in the script if your dataset is located elsewhere.
+
+3. **Generated Plots**: The script generates and saves several plots in a folder named `plots`:
+
+    - `class_distribution_training.png`: Visualizes the class distribution in the training dataset.
+    - `sample_images_training.png`: Displays sample images for each class in the training dataset.
+    - `outlier_detection.png`: Checks for outliers based on the number of images per class in the training dataset.
+    - `class_distribution_testing.png`: Visualizes the class distribution in the testing dataset.
+    - `sample_images_testing.png`: Displays sample images for each class in the testing dataset.
+
+### Customization
+
+- **Dataset Path**: Modify the `dataset_path` variable in the script to point to your specific dataset location.
+
+```python
+# Load the dataset from the folder
+dataset_path = r'your_dataset_path/Training'  # Update this path
+df = load_dataset(dataset_path)
+```
+
+- **Plots Folder**: By default, the script creates a folder named `plots` to save generated plots. If you want to change the folder name, update the following line in the script:
+
+```python
+# Create a folder to save plots
+if not os.path.exists('your_plots_folder'):
+    os.makedirs('your_plots_folder')  # Update this folder name
+```
+
+### Note
+
+- The script assumes a structured dataset with images organized in folders based on their labels.
+- Adjust the script according to your dataset structure if needed.
+- Feel free to modify and adapt the script for your specific visualization requirements.
+
 # Train and/or Evaluate available models:
 
 ## Train.py
