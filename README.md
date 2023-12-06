@@ -61,13 +61,7 @@ The `visualization.py` script is designed to explore and visualize image dataset
 
 To use the script, follow the steps below:
 
-1. **Import Dependencies**: Ensure that you have the necessary dependencies installed. You can install them using the following:
-
-    ```bash
-    pip install pandas matplotlib seaborn Pillow
-    ```
-
-2. **Run the Script**: Execute the script using the following command:
+1. **Run the Script**: Execute the script using the following command:
 
     ```bash
     python3 visualization.py
@@ -75,7 +69,7 @@ To use the script, follow the steps below:
 
     The script assumes a default dataset path (`fruitData/Training` for training and `fruitData/Test` for testing). Modify the `dataset_path` variable in the script if your dataset is located elsewhere.
 
-3. **Generated Plots**: The script generates and saves several plots in a folder named `plots`:
+2. **Generated Plots**: The script generates and saves several plots in a folder named `plots`:
 
     - `class_distribution_training.png`: Visualizes the class distribution in the training dataset.
     - `sample_images_training.png`: Displays sample images for each class in the training dataset.
