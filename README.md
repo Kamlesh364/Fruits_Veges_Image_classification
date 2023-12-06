@@ -103,9 +103,16 @@ dataset_path
         └── ...
 ```
 
-- `--mode`: The mode of the script, either 'train' or 'test'. If 'train', the script will train a model on the dataset and plot the losses and accuracies. If 'test', the script will load a pretrained model and evaluate it on the dataset.
+- `--mode`: The mode of the script, either `train` or `test`. If `train`, the script will train a model on the dataset and plot the losses and accuracies. If `test`, the script will load a pretrained model and evaluate it on the dataset.
 
-- `--model_name`: The name of the model to use, either 'base', 'alexnet', 'inception', 'mobilenet', or 'custom_mobilenet'. The 'base' model is a simple convolutional neural network with two convolutional layers and two fully connected layers. The 'alexnet' model is the AlexNet architecture proposed by Krizhevsky et al. in 2012. The 'inception' model is the Inception-v3 architecture proposed by Szegedy et al. in 2015.
+- - `--model_name`: The name of the model to use, choose from the following options:
+  - `base`: A simple convolutional neural network with two convolutional layers and two fully connected layers.
+  - `alexnet`: The AlexNet architecture proposed by Krizhevsky et al. in 2012.
+  - `inception`: The Inception-v3 architecture proposed by Szegedy et al. in 2015.
+  - `mobilenet`: The MobileNetV2 architecture introduced by Sandler et al. in the paper "MobileNetV2: Inverted Residuals and Linear Bottlenecks" (https://arxiv.org/abs/1801.04381).
+  - `custom_mobilenet`: A custom implementation of MobileNetV2 with adjustable parameters.
+
+Choose the appropriate model based on your specific requirements. For MobileNetV2, refer to the original paper for more details on its architecture and design.
 
 - `--epochs`: The number of epochs to train the model for. An epoch is one complete pass through the entire dataset. The default value is 10.
 
