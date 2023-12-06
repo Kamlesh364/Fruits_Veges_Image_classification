@@ -1,8 +1,47 @@
-from torch import save
+from torch import save, manual_seed
 from numpy import Inf
 from os.path import exists
 from os import mkdir
-from torchvision import transforms
+from torchvision import transforms, datasets
+from torch.utils.data import DataLoader, random_split
+from os.path import join
+
+
+def transformers(img_size):
+    return transforms.Compose([
+        transforms.Resize((img_size, img_size)),  # Resize images to fit Inception V3 input size
+        transforms.ToTensor()
+    ])
+
+
+# Function to load the dataset
+def load_dataset(folder_path, transform, batch_size=64, split_ratio=0.2, shuffle=True):
+    train_dataset = datasets.ImageFolder(root=join(folder_path,'Training'), transform=transform)
+    test_dataset = datasets.ImageFolder(root=join(folder_path,'Test'), transform=transform)
+
+    class_names = train_dataset.classes # classes
+
+    manual_seed(42) # Set random seed for reproducibility
+
+    # Split the dataset into train and validation
+    train_size = int((1-split_ratio) * len(train_dataset))
+    val_size = len(train_dataset) - train_size
+    train_dataset, val_dataset = random_split(train_dataset, [train_size, val_size])
+
+    # Create train, validation and test dataloaders
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=shuffle)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=shuffle)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+    return train_loader, val_loader, test_loader, class_names
+
+
+# Function to load the test dataset
+def load_test_dataset(folder_path, batch_size=64, img_size=224):
+    test_dataset = datasets.ImageFolder(root=join(folder_path,'Test'), transform=transformers(img_size))
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    return test_dataset, test_loader
+
 
 class EarlyStopping:
     def __init__(self, patience=10, delta=0, model_name="base", verbose=False):
@@ -45,8 +84,3 @@ class EarlyStopping:
         save(model.state_dict(), 'fruitData/checkpoints/{}_best.pt'.format(self.model_name))
         self.val_loss_min = val_loss
 
-def transformers(img_size):
-    return transforms.Compose([
-        transforms.Resize((img_size, img_size)),  # Resize images to fit Inception V3 input size
-        transforms.ToTensor()
-    ])

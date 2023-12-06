@@ -8,42 +8,10 @@ from os.path import exists
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torchvision import datasets
-from torch.utils.data import DataLoader, random_split
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, accuracy_score
 import numpy as np
-from os.path import join
-
-
-# Function to load the dataset
-def load_dataset(folder_path, transform, batch_size=64, split_ratio=0.2, shuffle=True):
-    train_dataset = datasets.ImageFolder(root=join(folder_path,'Training'), transform=transform)
-    test_dataset = datasets.ImageFolder(root=join(folder_path,'Test'), transform=transform)
-
-    class_names = train_dataset.classes # classes
-
-    torch.manual_seed(42) # Set random seed for reproducibility
-
-    # Split the dataset into train and validation
-    train_size = int((1-split_ratio) * len(train_dataset))
-    val_size = len(train_dataset) - train_size
-    train_dataset, val_dataset = random_split(train_dataset, [train_size, val_size])
-
-    # Create train, validation and test dataloaders
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=shuffle)
-    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=shuffle)
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
-
-    return train_loader, val_loader, test_loader, class_names
-
-
-# Function to load the test dataset
-def load_test_dataset(folder_path, batch_size=64, img_size=224):
-    test_dataset = datasets.ImageFolder(root=join(folder_path,'Test'), transform=transformers(img_size))
-    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
-    return test_dataset, test_loader
 
 
 # Function to load the model
@@ -55,7 +23,7 @@ def model_selection(model_name):
     if model_name == 'base':
         from baselinemodel import BaselineModel
         model = BaselineModel(num_classes=len(class_names)).to(device)
-        imf_size = 100
+        img_size = 100
     
     elif model_name == 'alexnet':
         from torchvision.models import alexnet
