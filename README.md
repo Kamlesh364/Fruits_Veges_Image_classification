@@ -18,7 +18,7 @@ In this project, the aim is to automate the packaging process of fruits and vege
 This script (`train.py`) is designed for training and evaluating deep learning models on a given dataset. The script supports various models and training configurations. Below is an example command to run the script:
 
 ```
-python train.py --dataset_path cat_dog_dataset --mode train --model_name custom_mobilenet --epochs 20 --batch_size 64 --split_ratio 0.7 --lr 0.01 --patience 10 --evaluate True
+python train.py --dataset_path cat_dog_dataset --mode train --model_name custom_mobilenet --epochs 20 --batch_size 64 --split_ratio 0.2 --lr 0.01 --patience 10 --evaluate True
 ```
 
 ## Usage
@@ -47,7 +47,6 @@ dataset_path
         ├── Grapes1.jpg
         ├── Grapes2.jpg
         └── ...
-    ```
 ```
 
 - `--mode`: The mode of the script, either 'train' or 'test'. If 'train', the script will train a model on the dataset and plot the losses and accuracies. If 'test', the script will load a pretrained model and evaluate it on the dataset.
@@ -58,7 +57,7 @@ dataset_path
 
 - `--batch_size`: The batch size to use for training and testing. A batch is a subset of the dataset that is fed to the model at once. The default value is 32.
 
-- `--split_ratio`: The ratio of the dataset to use for training and validation. The validation set is used to monitor the performance of the model during training and avoid overfitting. The default value is 0.8, which means 80% of the dataset will be used for training and 20% for validation.
+- `--split_ratio`: The ratio of the dataset to use for training and validation. The validation set is used to monitor the performance of the model during training and avoid overfitting. The default value is 0.2, which means 80% of the dataset will be used for training and 20% for validation.
 
 - `--shuffle`: A boolean flag that indicates whether to shuffle the dataset before splitting it into training and validation sets. Shuffling the dataset helps to reduce the bias and variance of the model. The default value is True.
 
