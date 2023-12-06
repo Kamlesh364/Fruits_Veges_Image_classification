@@ -11,6 +11,48 @@ In this project, the aim is to automate the packaging process of fruits and vege
 7. Performance analysis
 ```
 
+## Repository Setup
+
+Follow the steps below to set up the repository and install the necessary requirements:
+
+1. **Clone the Repository**: Clone this repository to your local machine using the following command:
+
+    ```bash
+    git clone https://github.com/kamlesh364/fruits-vegetables-packaging.git
+    ```
+
+2. **Navigate to Repository**: Change your working directory to the cloned repository:
+
+    ```bash
+    cd fruits-vegetables-packaging
+    ```
+
+3. **Create Virtual Environment (Optional)**: It's recommended to use a virtual environment to avoid conflicts with existing packages. Create a virtual environment using the following command:
+
+    ```bash
+    python3 -m venv venv
+    ```
+
+4. **Activate Virtual Environment (Optional)**: Activate the virtual environment:
+
+    - On Windows:
+
+        ```bash
+        .\venv\Scripts\activate
+        ```
+
+    - On macOS/Linux:
+
+        ```bash
+        source venv/bin/activate
+        ```
+
+5. **Install Requirements**: Install the required dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
 # Visualization.py - Dataset Exploration and Visualization
 
 The `visualization.py` script is designed to explore and visualize image datasets. It loads images and labels, provides basic information about the dataset, visualizes the class distribution, displays sample images for each class, and checks for outliers based on the number of images per class.
@@ -47,7 +89,7 @@ To use the script, follow the steps below:
 
 ```python
 # Load the dataset from the folder
-dataset_path = r'your_dataset_path/Training'  # Update this path
+dataset_path = r'fruitData/Training'  # Update this path
 df = load_dataset(dataset_path)
 ```
 
@@ -55,8 +97,8 @@ df = load_dataset(dataset_path)
 
 ```python
 # Create a folder to save plots
-if not os.path.exists('your_plots_folder'):
-    os.makedirs('your_plots_folder')  # Update this folder name
+if not os.path.exists('fruitData/plots'):
+    os.makedirs('fruitData/plots')  # Update this folder name
 ```
 
 ### Note
