@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.optim as optim
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report, precision_score, recall_score, f1_score, accuracy_score, top_k_accuracy_score, roc_curve, auc
 import numpy as np
 
 
@@ -67,23 +67,70 @@ def evaluate_model(model, test_loader, class_names):
     # Evaluate the model on test set
     model.eval()
 
+    # Evaluate the model on the test set
     all_labels = []
     all_predictions = []
+    all_probabilities = []
 
     with torch.no_grad():
         for inputs, labels in test_loader:
             inputs, labels = inputs.to(device), labels.to(device)
             outputs = model(inputs)
+            
+            # Assuming you're using softmax activation in the final layer
+            probabilities = torch.nn.functional.softmax(outputs, dim=1)
+
             _, predicted = torch.max(outputs, 1)
+
             all_labels.extend(labels.cpu().numpy())
             all_predictions.extend(predicted.cpu().numpy())
+            all_probabilities.extend(probabilities.cpu().numpy())
+
+    # Convert lists to NumPy arrays
+    all_labels = np.array(all_labels)
+    all_predictions = np.array(all_predictions)
+    all_probabilities = np.array(all_probabilities)
 
     # Calculate accuracy
     accuracy = accuracy_score(all_labels, all_predictions)
     print(f'Overall Test Accuracy: {accuracy*100:.4f} %')
 
+    # Calculate precision, recall, and f1-score
+    precision = precision_score(all_labels, all_predictions, average='weighted')
+    recall = recall_score(all_labels, all_predictions, average='weighted')
+    # Calculate F1-score
+    f1 = f1_score(all_labels, all_predictions, average='weighted')
+
     # Calculate confusion matrix
     conf_matrix = confusion_matrix(all_labels, all_predictions)
+
+    # Calculate precision, recall, and F1-score for each class
+    class_report = classification_report(all_labels, all_predictions, target_names=class_names)
+
+    # Calculate micro-average specificity
+    micro_avg_specificity = np.sum(np.diag(conf_matrix)) / np.sum(conf_matrix)
+
+    # Calculate ROC curve and area under the ROC curve
+    # Note: this is for the first class; you should adapt it for all classes
+    fpr, tpr, _ = roc_curve(all_labels == 0, all_probabilities[:, 0])
+    roc_auc = auc(fpr, tpr)
+
+    # Calculate top-10 accuracy
+    # Note: top_k_accuracy_score requires probabilities, so you might need to modify for your specific case
+    # Assuming you have probabilities in all_probabilities (shape: [n_samples, n_classes])
+    top_10_accuracy = top_k_accuracy_score(all_labels, all_probabilities, k=10)
+
+    # Print or use the calculated metrics as needed
+    print(f'Weighted F1-score: {f1:.4f}')
+    # print('Confusion Matrix:')
+    # print(conf_matrix)
+    print('Classification Report:')
+    print(class_report)
+    print(f'precision: {precision:.4f}')
+    print(f'recall: {recall:.4f}')
+    print(f'F1-score: {f1:.4f}')
+    print(f'Micro-average Specificity: {micro_avg_specificity:.4f}')
+    print(f'Area under the ROC Curve: {roc_auc:.4f}')
 
     # Calculate accuracy for each class
     class_labels = np.array(all_labels)
