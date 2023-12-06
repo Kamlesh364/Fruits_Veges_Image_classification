@@ -1,5 +1,5 @@
 """
-python your_script.py --dataset_path your_dataset_path --model_name your_model_name --epochs 10 --batch_size 64 --split_ratio 0.2 --shuffle True --lr 0.001 --patience 50
+python main.py --dataset_path your_dataset_path --model_name your_model_name --epochs 10 --batch_size 64 --split_ratio 0.2 --shuffle True --lr 0.001 --patience 50
 """
 
 from utils import *

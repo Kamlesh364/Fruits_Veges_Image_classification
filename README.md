@@ -67,12 +67,12 @@ if not os.path.exists('your_plots_folder'):
 
 # Train and/or Evaluate available models:
 
-## Train.py
+## main.py
 
-This script (`train.py`) is designed for training and evaluating deep learning models on a given dataset. The script supports various models and training configurations. Below is an example command to run the script:
+This script (`main.py`) is designed for training and evaluating deep learning models on a given dataset. The script supports various models and training configurations. Below is an example command to run the script:
 
 ```
-python3 train.py --dataset_path cat_dog_dataset --mode train --model_name custom_mobilenet --epochs 20 --batch_size 64 --split_ratio 0.2 --lr 0.01 --patience 10 --evaluate True
+python3 main.py --dataset_path cat_dog_dataset --mode train --model_name custom_mobilenet --epochs 20 --batch_size 64 --split_ratio 0.2 --lr 0.01 --patience 10 --evaluate True
 ```
 
 ## Usage
@@ -135,7 +135,7 @@ Choose the appropriate model based on your specific requirements. For MobileNetV
 To train the alexnet model on the cat and dog dataset for 20 epochs, with a batch size of 64, a split ratio of 0.7, a learning rate of 0.01, a patience of 10, and evaluate it on the test set, you can run the following command:
 
 ```
-python train.py --dataset_path cat_dog_dataset --mode train --model_name alexnet --epochs 20 --batch_size 64 --split_ratio 0.7 --lr 0.01 --patience 10 --evaluate True
+python main.py --dataset_path cat_dog_dataset --mode train --model_name alexnet --epochs 20 --batch_size 64 --split_ratio 0.2 --lr 0.001 --patience 10 --evaluate True
 ```
 
 This will output the training and validation losses and accuracies for each epoch, and the test accuracy at the end. It will also save the trained model as 'alexnet.pt' and the plots as 'AlexNet.png' in the same folder as the script.

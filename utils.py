@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader, random_split
 from os.path import join
 
 
+# Function to transform the images
 def transformers(img_size):
     return transforms.Compose([
         transforms.Resize((img_size, img_size)),  # Resize images to fit Inception V3 input size
@@ -43,6 +44,7 @@ def load_test_dataset(folder_path, batch_size=64, img_size=224):
     return test_dataset, test_loader
 
 
+# Function to create Early Stopping
 class EarlyStopping:
     def __init__(self, patience=10, delta=0, model_name="base", verbose=False):
         self.patience = patience
